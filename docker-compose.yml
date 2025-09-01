@@ -1,0 +1,52 @@
+services:
+  video-summarization:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - AI_PROVIDER=google
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
+        - OPENAI_MODEL=gpt-4
+        - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+        - ANTHROPIC_MODEL=claude-3-sonnet-20240229
+        - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+        - GOOGLE_MODEL=gemini-1.5-flash
+        - TRANSCRIPTION_MODEL=whisper
+        - WHISPER_MODEL=base
+        - MAX_VIDEO_SIZE_MB=1024
+        - SUPPORTED_FORMATS=mp4,avi,mov,mkv,webm
+        - HOST=0.0.0.0
+        - PORT=3300
+        - VIDEO_INPUT_FOLDER=/app/videos
+        - VIDEO_OUTPUT_FOLDER=/app/processed
+    image: 0coool/video-summarization:latest
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3300", "--log-level", "info"]
+    ports:
+      - "3300"
+    env_file:
+      - .env
+    volumes:
+      - video-summarization:/app/videos
+      - video-summarization:/app/processed
+    restart: on-failure:5
+    networks:
+      - dokploy-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3300/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3    
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.video-summarization.rule=Host(`video-summarization.watstuff.store`)"
+      - "traefik.http.routers.video-summarization.entrypoints=websecure"
+      - "traefik.http.routers.video-summarization.tls.certResolver=letsencrypt"
+      - "traefik.http.services.video-summarization.loadbalancer.server.port=3300"
+volumes:
+  video-summarization:
+    driver: local
+
+networks:
+  dokploy-network:
+    external: true
+
