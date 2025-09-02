@@ -13,7 +13,7 @@ from typing import Dict, Any
 class VideoSummarizationClient:
     """Cliente para interactuar con la Video Summarization API"""
     
-    def __init__(self, base_url: str = "http://localhost:80"):
+    def __init__(self, base_url: str = "http://localhost:3300"):
         self.base_url = base_url.rstrip('/')
         self.session = requests.Session()
     

@@ -148,7 +148,7 @@ def create_test_video():
         fps = 24
         
         # Video simple
-        video = ColorClip(size=(640, 480), color=(255, 0, 0), duration=duration)
+        video = ColorClip(size=(640, 43300), color=(255, 0, 0), duration=duration)
         video = video.set_fps(fps)
         
         # Audio simple (tono)
@@ -232,7 +232,7 @@ def main():
         print("\n📝 Próximos pasos:")
         print("1. Edita el archivo .env con tus API keys")
         print("2. Ejecuta: python run.py")
-        print("3. Accede a: http://localhost:80/docs")
+        print("3. Accede a: http://localhost:3300/docs")
         
     else:
         print("⚠️ Algunas pruebas fallaron. Revisa los errores arriba.")
