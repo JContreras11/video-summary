@@ -45,6 +45,7 @@ services:
       - traefik.http.routers.video-summarization-secure.entrypoints=websecure
       - traefik.http.routers.video-summarization-secure.tls.certresolver=letsencrypt
       - traefik.http.services.video-summarization.loadbalancer.server.port=3300
+
 volumes:
   video-summarization:
     driver: local
