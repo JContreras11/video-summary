@@ -72,8 +72,8 @@ def main():
     check_folders()
     
     print("\n🚀 Iniciando servidor...")
-    print("📖 Documentación disponible en: http://localhost:8000/docs")
-    print("🔍 Health check en: http://localhost:8000/health")
+    print("📖 Documentación disponible en: http://localhost:80/docs")
+    print("🔍 Health check en: http://localhost:80/health")
     print("⏹️  Presiona Ctrl+C para detener\n")
     
     try:

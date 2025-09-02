@@ -10,7 +10,7 @@ class Config:
     
     # Configuración del servidor
     HOST = os.getenv("HOST", "0.0.0.0")
-    PORT = int(os.getenv("PORT", 8000))
+    PORT = int(os.getenv("PORT", 80))
     
     # Carpetas de videos
     VIDEO_INPUT_FOLDER = os.getenv("VIDEO_INPUT_FOLDER", "./videos")

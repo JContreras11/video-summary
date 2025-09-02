@@ -76,7 +76,7 @@ VIDEO_OUTPUT_FOLDER=./processed
 
 # Configuración del servidor
 HOST=0.0.0.0
-PORT=8000
+PORT=80
 ```
 
 ### 3. Crear carpetas necesarias
@@ -98,19 +98,19 @@ O directamente:
 python main.py
 ```
 
-El servidor estará disponible en `http://localhost:8000`
+El servidor estará disponible en `http://localhost:80`
 
 ### Documentación automática
 
-- **Swagger UI**: `http://localhost:8000/docs`
-- **ReDoc**: `http://localhost:8000/redoc`
+- **Swagger UI**: `http://localhost:80/docs`
+- **ReDoc**: `http://localhost:80/redoc`
 
 ## Endpoints de la API
 
 ### 1. Procesar video específico
 
 ```bash
-curl -X POST "http://localhost:8000/process-video" \
+curl -X POST "http://localhost:80/process-video" \
   -H "Content-Type: application/json" \
   -d '{
     "video_path": "/ruta/al/video.mp4",
@@ -121,7 +121,7 @@ curl -X POST "http://localhost:8000/process-video" \
 ### 2. Procesar carpeta completa
 
 ```bash
-curl -X POST "http://localhost:8000/process-folder" \
+curl -X POST "http://localhost:80/process-folder" \
   -H "Content-Type: application/json" \
   -d '{
     "folder_path": "/ruta/a/carpeta",
@@ -132,7 +132,7 @@ curl -X POST "http://localhost:8000/process-folder" \
 ### 3. Webhook para procesamiento
 
 ```bash
-curl -X POST "http://localhost:8000/webhook/process" \
+curl -X POST "http://localhost:80/webhook/process" \
   -F "video_path=/ruta/al/video.mp4" \
   -F "callback_url=https://tu-webhook.com/callback"
 ```
@@ -140,19 +140,19 @@ curl -X POST "http://localhost:8000/webhook/process" \
 ### 4. Verificar estado de tarea
 
 ```bash
-curl "http://localhost:8000/task/{task_id}"
+curl "http://localhost:80/task/{task_id}"
 ```
 
 ### 5. Listar archivos generados
 
 ```bash
-curl "http://localhost:8000/files"
+curl "http://localhost:80/files"
 ```
 
 ### 6. Descargar resumen
 
 ```bash
-curl "http://localhost:8000/files/{filename}" --output resumen.txt
+curl "http://localhost:80/files/{filename}" --output resumen.txt
 ```
 
 ## Formato de respuesta
