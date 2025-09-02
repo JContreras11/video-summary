@@ -37,12 +37,17 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=dokploy-network
-      - traefik.http.routers.video-summarization.rule=Host(`video-summarization.watstuff.store`)
-      - traefik.http.routers.video-summarization.entrypoints=web
-      - traefik.http.routers.video-summarization-secure.rule=Host(`video-summarization.watstuff.store`)
-      - traefik.http.routers.video-summarization-secure.entrypoints=websecure
-      - traefik.http.routers.video-summarization-secure.tls.certresolver=letsencrypt
-      - traefik.http.services.video-summarization.loadbalancer.server.port=3300
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-web.rule=Host(`video-summarization.watstuff.store`)
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-web.entrypoints=web
+      - traefik.http.services.test-business-video-summarization-izpeqr-21-web.loadbalancer.server.port=3300
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-web.service=test-business-video-summarization-izpeqr-21-web
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-websecure.rule=Host(`video-summarization.watstuff.store`)
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-websecure.entrypoints=websecure
+      - traefik.http.services.test-business-video-summarization-izpeqr-21-websecure.loadbalancer.server.port=3300
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-websecure.service=test-business-video-summarization-izpeqr-21-websecure
+      - traefik.http.routers.test-business-video-summarization-izpeqr-21-websecure.tls.certresolver=letsencrypt
+
 
 volumes:
   video-summarization:
