@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   video-summarization:
     build:
@@ -23,7 +22,7 @@ services:
     image: 0coool/video-summarization:latest
     command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3300", "--log-level", "info"]
     ports:
-      - "80:3300"  # Cambiado para exponer el puerto 80 para Nginx
+      - "8080:80"  # Cambia a "8080:80" si el puerto 80 está ocupado
     env_file:
       - .env
     volumes:
