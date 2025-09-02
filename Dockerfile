@@ -16,8 +16,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia el resto del código de la aplicación
 COPY . .
 
-# Expone el puerto en el que la aplicación correrá (coincide con Config.PORT)
-EXPOSE 3300
+# Instalar Nginx
+RUN apt-get update && apt-get install -y nginx
 
-# Comando por defecto: uvicorn (producción sin reload)
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3300", "--log-level", "info"]
+# Copiar el archivo de configuración de Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Exponer el puerto 80 para Nginx
+EXPOSE 80
+
+# Comando para iniciar Nginx y tu aplicación
+CMD service nginx start && python3 main.py
