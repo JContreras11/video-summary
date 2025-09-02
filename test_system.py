@@ -232,7 +232,7 @@ def main():
         print("\n📝 Próximos pasos:")
         print("1. Edita el archivo .env con tus API keys")
         print("2. Ejecuta: python run.py")
-        print("3. Accede a: http://localhost:3300/docs")
+        print("3. Accede a: http://localhost:8000/docs")
         
     else:
         print("⚠️ Algunas pruebas fallaron. Revisa los errores arriba.")

@@ -123,8 +123,8 @@ def main():
     print("\n🎉 ¡Configuración completada exitosamente!")
     print("\n📝 Próximos pasos:")
     print("1. Ejecuta: python run.py")
-    print("2. Procesa tu video: curl -X POST 'http://localhost:3300/process-video' -H 'Content-Type: application/json' -d '{\"video_path\": \"./videos/minuta_compressed.mp4\"}'")
-    print("3. Accede a: http://localhost:3300/docs")
+    print("2. Procesa tu video: curl -X POST 'http://localhost:8000/process-video' -H 'Content-Type: application/json' -d '{\"video_path\": \"./videos/minuta_compressed.mp4\"}'")
+    print("3. Accede a: http://localhost:8000/docs")
 
 if __name__ == "__main__":
     main()
