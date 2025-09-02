@@ -21,8 +21,6 @@ services:
         - VIDEO_OUTPUT_FOLDER=/app/processed
     image: 0coool/video-summarization:latest
     command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3300", "--log-level", "info"]
-    ports:
-      - "80:3300"
     env_file:
       - .env
     volumes:
@@ -53,4 +51,3 @@ volumes:
 networks:
   dokploy-network:
     external: true
-
