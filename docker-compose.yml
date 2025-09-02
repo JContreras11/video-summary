@@ -22,7 +22,7 @@ services:
     image: 0coool/video-summarization:latest
     command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3300", "--log-level", "info"]
     ports:
-      - "3300:3300"
+      - "3300"
     env_file:
       - .env
     volumes:
@@ -37,10 +37,7 @@ services:
       timeout: 10s
       retries: 3    
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.video-summarization.rule=Host(`watstuff.store`)"
-      - "traefik.http.routers.video-summarization.entrypoints=websecure"
-      - "traefik.http.routers.video-summarization.tls.certResolver=letsencrypt"
+      - "traefik.enable=true"      
       - "traefik.http.services.video-summarization.loadbalancer.server.port=3300"
 volumes:
   video-summarization:
