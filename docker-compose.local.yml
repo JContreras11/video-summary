@@ -1,0 +1,28 @@
+services:
+  video-summarization:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:3300"  # Map localhost:8080 to container:3300
+    env_file:
+      - .env
+    volumes:
+      - ./videos:/app/videos
+      - ./processed:/app/processed
+      - .:/app  # Mount source code for development
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3300/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3300", "--reload"]
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+
+volumes:
+  videos:
+  processed:

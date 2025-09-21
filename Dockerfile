@@ -1,22 +1,30 @@
-# Usa una imagen base de Python
-FROM python:3.9-slim
+# Usa una imagen base de Python más reciente
+FROM python:3.11-slim
 
-# Instalar Nginx
-RUN apt-get update && apt-get install -y nginx
+# Instalar dependencias del sistema necesarias
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    curl \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copiar el archivo de configuración de Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Instalar dependencias de Python
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-# Copiar el código de la aplicación
-COPY . /app
+# Establecer directorio de trabajo
 WORKDIR /app
 
-# Exponer el puerto 80 para Nginx
-EXPOSE 80
+# Copiar requirements primero para aprovechar cache de Docker
+COPY requirements.txt .
 
-# Comando para iniciar Nginx y tu aplicación
-CMD service nginx start && uvicorn main:app --host 0.0.0.0 --port 3300
+# Instalar dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar el código de la aplicación
+COPY . .
+
+# Crear directorios necesarios
+RUN mkdir -p /app/videos /app/processed
+
+# Exponer el puerto de la aplicación
+EXPOSE 3300
+
+# Comando para iniciar la aplicación
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3300"]
